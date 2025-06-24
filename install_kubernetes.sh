@@ -34,16 +34,14 @@ fi
 echo "✅ All required tools are installed"
 
 # Ensure we're in the project root
-cd ~/javdes
+cd ~/javdes/infra-fatih
 
 # Setup Kubespray if it doesn't exist
-if [ ! -d ~/javdes/kubespray ]; then
+if [ ! -d ~/javdes/infra-fatih/kubespray ]; then
     echo "📦 Setting up Kubespray..."
-    cd ~/javdes
     git clone https://github.com/kubernetes-sigs/kubespray.git
-    cd kubespray
     
-    # Create and activate virtual environment
+    # Create and activate virtual environment in infra-fatih directory
     echo "🔧 Creating kubespray virtual environment..."
     python3 -m venv kubespray-venv
     source kubespray-venv/bin/activate
@@ -51,7 +49,7 @@ if [ ! -d ~/javdes/kubespray ]; then
     # Install requirements
     echo "📦 Installing Kubespray requirements..."
     pip install -U pip
-    pip install -r requirements.txt
+    pip install -r kubespray/requirements.txt
     
 else
     echo "✅ Kubespray already exists"
@@ -59,7 +57,7 @@ fi
 
 # Activate kubespray virtual environment
 echo "🔧 Activating kubespray virtual environment..."
-source ~/javdes/kubespray/kubespray-venv/bin/activate
+source ~/javdes/infra-fatih/kubespray-venv/bin/activate
 
 # Verify terraform infrastructure exists
 echo "🔍 Verifying terraform infrastructure..."
@@ -131,10 +129,10 @@ echo "- 1 Worker Node: worker-1"
 echo "- Network: 10.240.0.0/24"
 echo ""
 
-cd ~/javdes/kubespray
+cd ~/javdes/infra-fatih/kubespray
 
 # Run the cluster installation
-ansible-playbook -i ../infra-fatih/ansible/inventory_dynamic.py -b cluster.yml
+ansible-playbook -i ../ansible/inventory_dynamic.py -b cluster.yml
 
 if [ $? -eq 0 ]; then
     echo ""
