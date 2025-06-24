@@ -5,8 +5,8 @@ This repository contains Infrastructure as Code (IaC) for deploying a production
 ## 🏗️ Architecture
 
 - **Infrastructure**: 4 VMs on Google Cloud Platform
-  - `master-1`, `master-2`: Control Plane + etcd nodes
-  - `worker-1`, `worker-2`: Worker nodes with applications
+  - `master-1`, `master-2`, `master-3`: Control Plane + etcd nodes
+  - `worker-1` : Worker node with applications
 - **Provisioning**: Terraform for infrastructure
 - **Configuration**: Ansible + Kubespray for Kubernetes
 - **Applications**: Jenkins, ArgoCD, Vault, Harbor, NFS Storage
