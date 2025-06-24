@@ -23,14 +23,6 @@ if ! command -v git &> /dev/null; then
     missing_tools+=("git")
 fi
 
-if ! command -v ansible &> /dev/null; then
-    missing_tools+=("ansible")
-fi
-
-if ! command -v jq &> /dev/null; then
-    missing_tools+=("jq")
-fi
-
 if [ ${#missing_tools[@]} -ne 0 ]; then
     echo "❌ Missing required tools: ${missing_tools[*]}"
     echo "Please install them first:"
