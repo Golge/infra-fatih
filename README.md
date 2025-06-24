@@ -97,4 +97,4 @@ This project is part of the JavaDes DevOps learning initiative. Feel free to con
 ---
 
 **Author**: fatihgumush@gmail.com  
-**Project**: JavaDes DevOps Infrastructure
+**Project**: JavDes Test Scenario DevOps Infrastructure
