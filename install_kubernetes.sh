@@ -37,8 +37,9 @@ echo "✅ All required tools are installed"
 cd ~/javdes
 
 # Setup Kubespray if it doesn't exist
-if [ ! -d "kubespray" ]; then
+if [ ! -d ~/javdes/kubespray ]; then
     echo "📦 Setting up Kubespray..."
+    cd ~/javdes
     git clone https://github.com/kubernetes-sigs/kubespray.git
     cd kubespray
     
@@ -52,24 +53,20 @@ if [ ! -d "kubespray" ]; then
     pip install -U pip
     pip install -r requirements.txt
     
-    cd ..
 else
     echo "✅ Kubespray already exists"
-    cd kubespray
-    source kubespray-venv/bin/activate
-    cd ..
 fi
 
 # Activate kubespray virtual environment
 echo "🔧 Activating kubespray virtual environment..."
-source kubespray/kubespray-venv/bin/activate
+source ~/javdes/kubespray/kubespray-venv/bin/activate
 
 # Verify terraform infrastructure exists
 echo "🔍 Verifying terraform infrastructure..."
-cd infra-fatih/terraform
+cd ~/javdes/infra-fatih/terraform
 if [ ! -f "terraform.tfstate" ]; then
     echo "❌ No terraform state found! Please run 'terraform apply' first."
-    echo "   cd terraform/ && terraform init && terraform apply"
+    echo "   cd ~/javdes/infra-fatih/terraform/ && terraform init && terraform apply"
     exit 1
 fi
 
@@ -87,16 +84,15 @@ echo "✅ Using $TF_CMD command"
 $TF_CMD output -json > /tmp/tf_output.json
 if [ $? -ne 0 ]; then
     echo "❌ Cannot get terraform output. Infrastructure may not be deployed."
-    echo "   Run: cd terraform/ && $TF_CMD apply"
+    echo "   Run: cd ~/javdes/infra-fatih/terraform/ && $TF_CMD apply"
     exit 1
 fi
 
 echo "✅ Infrastructure verified"
-cd ..
 
 # Test connectivity first
 echo "🔍 Testing connectivity to all hosts..."
-cd infra-fatih/ansible
+cd ~/javdes/infra-fatih/ansible
 
 # Make inventory script executable
 chmod +x inventory_dynamic.py
