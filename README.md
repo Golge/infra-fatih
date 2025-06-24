@@ -16,26 +16,47 @@ This repository contains Infrastructure as Code (IaC) for deploying a production
 ### Prerequisites
 - GCloud CLI configured with project access
 - Terraform/OpenTofu installed
+- Python 3 with pip
 - Ansible installed
-- SSH key pair generated
+- Git installed
+- jq (for JSON parsing)
+- SSH key pair generated (`~/.ssh/gcp_javdes`)
 
-### 1. Provision Infrastructure
+### Installation
+
+#### 1. Install Prerequisites (Ubuntu/Debian)
 ```bash
-cd terraform/
+sudo apt update
+sudo apt install -y python3 python3-pip git ansible jq
+
+# Install terraform or tofu
+# For terraform: https://developer.hashicorp.com/terraform/install
+# For tofu: https://opentofu.org/docs/intro/install/
+```
+
+#### 2. Provision Infrastructure
+```bash
+cd ~/javdes/infra-fatih/terraform/
 terraform init
 terraform plan
 terraform apply
 ```
 
-### 2. Install Kubernetes
+#### 3. Test Setup (Optional)
 ```bash
-# Run the automated installation script
+cd ~/javdes/infra-fatih/
+./test_setup.sh
+```
+
+#### 4. Install Kubernetes
+```bash
+cd ~/javdes/infra-fatih/
 ./install_kubernetes.sh
 ```
 
-### 3. Install Applications
+#### 5. Install Applications
 ```bash
-cd scripts/
+cd ~/javdes/infra-fatih/scripts/
 ./install_all_apps.sh
 ```
 
