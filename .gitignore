@@ -36,6 +36,9 @@ venv/
 .venv/
 kubespray-venv/
 
+# Kubespray repo
+kubespray/
+
 # IDE and Editor files
 .vscode/
 .idea/
